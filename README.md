@@ -1,43 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Live Love Animation</title>
-<style>
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #222;
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-
-  .animated-text {
-    font-size: 4em;
-    font-weight: bold;
-    letter-spacing: 0.1em;
-    animation: pulse 2s infinite, colorChange 1s infinite;
-  }
-
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-  }
-
-  @keyframes colorChange {
-    0% { color: #ff4d4d; }
-    25% { color: #ffcc00; }
-    50% { color: #4dff4d; }
-    75% { color: #00ccff; }
-    100% { color: #ff4d4d; }
-  }
-</style>
+    <title>Daily Expense Tracker</title>
 </head>
 <body>
-  <div class="animated-text">😁THANK YOU🌹</div>
+<h2>Daily Expense Tracker</h2>
+<input type="date" id="date">
+<input type="text" id="expenseName" placeholder="Expense Name">
+<input type="number" id="amount" placeholder="Amount">
+<button onclick="addExpense()">Add Expense</button>
+<h3>Expenses List</h3>
+ <ul id="expenseList"></ul>
+<h3>Total Expenses: ₹<span id="total">0</span></h3>
+<script>
+let total = 0;
+function addExpense() {
+    let date = document.getElementById("date").value;
+    let name = document.getElementById("expenseName").value;
+    let amount = Number(document.getElementById("amount").value);
+    if (!date || !name || amount <= 0) {
+        alert("Please fill all fields");
+        return;
+    }
+    let li = document.createElement("li");
+    li.textContent = `${date} - ${name} : ₹${amount}`;    document.getElementById("expenseList").appendChild(li);
+    total += amount;    document.getElementById("total").textContent = total;   document.getElementById("expenseName").value = "";    document.getElementById("amount").value = "";
+}
+</script>
+
 </body>
 </html>
